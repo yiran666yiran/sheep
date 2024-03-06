@@ -1,3 +1,4 @@
 *.c
 ╢Ср╩об/
+.vscode/
 !test.c
