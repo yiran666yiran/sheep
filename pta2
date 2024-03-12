@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct book{
+    char name[31];
+    double cost;
+};
+int main()
+{
+    int n,max,min;
+    struct book B[10];
+    scanf("%d",&n);
+    for(int i = 0; i < n; i++)
+    {
+        getchar();
+        gets(B[i].name);
+        scanf(" %lf",&B[i].cost);
+    }
+    max = 0;
+    for(int i = 1; i < n; i++)
+    {
+        if(B[i].cost > B[max].cost)
+        {
+            max = i;
+        }
+    }
+    min = 0;
+     for(int i = 1; i < n; i++)
+    {
+        if(B[i].cost < B[min].cost)
+        {
+            min = i;
+        }
+    }
+    printf("%.2f, %s\n", B[max].cost, B[max].name);
+    printf("%.2f, %s\n", B[min].cost, B[min].name);
+    return 0;
+}
