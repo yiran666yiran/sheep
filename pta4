@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    float *p;
+    p=(float*)malloc(sizeof(float)*n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%f",&p[i]);
+    }
+    float average=0,sum=0;
+    int min=0,max=0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=p[i];
+    }
+    average=sum/n;
+    for(int i=0;i<n;i++)
+    {
+        if(p[i]<p[min])
+        {
+            min=i;
+        }   
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(p[i]>p[max])
+        {
+            max=i;
+        }   
+    }
+    printf("average = %.2f\nmax = %.2f\nmin = %.2f",average,p[max],p[min]);
+    return 0;
+}
