@@ -1,0 +1,22 @@
+int lengthOfLongestSubstring(char * s){
+    int result=0;
+    int hush[256]={0};
+    int left=0;
+    int right=-1;
+    int len=strlen(s);
+    while(left<len){
+    	//下一字符在Left和right之间
+		if(hush[s[right+1]]==0&&right<len-1){
+			hush[s[++right]]++;
+		}
+		//下一字符不在Left和right之间
+		else{
+			hush[s[left++]]--;
+		}
+		//更新最长子串长度 
+		if(right-left+1>result){
+			result=right-left+1;
+		}
+	}
+	return result;
+}
