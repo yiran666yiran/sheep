@@ -1,0 +1,39 @@
+int erfen(int *nums1,int *nums2, int nums1Size,int nums2Size, int k){
+    int i=0,j=0; //i，j 记住 k/2-1 的老位置，方便下一次改变
+    while(true){
+        //边界情况，只有一边存在数字,直接返回另一个数组的中值即可
+        if(nums1Size==i){
+            return nums2[j+k-1];
+        }
+        if(nums2Size==j){
+            return nums1[i+k-1];
+        }
+        //最后一步就要找到结果了，返回两个值中较小的一个，就是结果
+        if(k==1){
+            return nums1[i]>nums2[j]?nums2[j]:nums1[i];
+        }
+        //中间不断判断更新k值的过程
+        int newi =(i + k / 2 - 1)>(nums1Size - 1)?nums1Size - 1:(i + k / 2 - 1);
+        int newj =(j + k / 2 - 1)>(nums2Size - 1)?nums2Size - 1:(j + k / 2 - 1);
+        int pivot1 = nums1[newi];
+        int pivot2 = nums2[newj];
+        //比较这两个数 
+        if (pivot1 <= pivot2) {
+            k -= newi - i + 1;
+            i = newi + 1;
+        }
+        else {
+            k -= newj - j + 1;
+            j = newj + 1;
+        }
+    }
+}
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size){
+    int numsSize=nums1Size+nums2Size;
+    if(numsSize%2==1){
+        return(erfen(nums1,nums2,nums1Size,nums2Size,(numsSize+1)/2));
+    }
+    else{
+        return (erfen(nums1, nums2,nums1Size, nums2Size,numsSize / 2) + erfen(nums1,nums2,nums1Size,nums2Size, numsSize / 2 + 1)) / 2.0;  //PS：2.0很重要，要注意小数
+    }
+}
